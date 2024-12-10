@@ -1,0 +1,523 @@
+body {
+    font-family: 'Crimson Text', 'Noto Serif TC', serif;
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+    background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+    color: #e2e2e2;
+}
+
+.tarot-container {
+    max-width: 1200px;
+    margin: 20px auto;
+    padding: 30px 20px;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 20px;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+    box-sizing: border-box;
+}
+
+.header {
+    text-align: center;
+    margin-bottom: 40px;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0 20px;
+}
+
+.header h1 {
+    font-size: 3em;
+    color: #ffd700;
+    text-shadow: 0 0 10px rgba(255, 215, 0, 0.3);
+    margin: 0;
+    letter-spacing: 3px;
+}
+
+.question-section {
+    margin: 40px auto;
+    text-align: center;
+    max-width: 800px;
+    background: rgba(255, 255, 255, 0.05);
+    padding: 30px;
+    border-radius: 20px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+    width: 90%;
+    box-sizing: border-box;
+}
+
+.button-container {
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+}
+
+#question-input {
+    width: 100%;
+    padding: 20px;
+    font-size: 18px;
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 15px;
+    color: #fff;
+    resize: none;
+    transition: all 0.3s ease;
+    margin-bottom: 20px;
+    box-sizing: border-box;
+}
+
+#question-input:focus {
+    outline: none;
+    background: rgba(255, 255, 255, 0.15);
+    border-color: #ffd700;
+    box-shadow: 0 0 20px rgba(255, 215, 0, 0.2);
+}
+
+#start-button {
+    padding: 15px 50px;
+    font-size: 20px;
+    background: linear-gradient(45deg, #ffd700, #ff8c00);
+    border: none;
+    border-radius: 30px;
+    color: #1a1a2e;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    box-shadow: 0 5px 15px rgba(255, 215, 0, 0.3);
+}
+
+#start-button:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(255, 215, 0, 0.4);
+}
+
+.deck {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 500px;
+    position: relative;
+    margin: 30px auto;
+    width: 100%;
+    max-width: 800px;
+    perspective: 1000px;
+    overflow: visible;
+}
+
+.card-back {
+    width: 60px;
+    height: 100px;
+    background-image: url('/static/BG.png');
+    background-size: 100% 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-color: #1a1a2e;
+    border-radius: 8px;
+    cursor: pointer;
+    position: absolute;
+    transform-origin: center 120%;
+    transition: transform 0.3s ease;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+    will-change: transform;
+}
+
+.card-back:hover {
+    transform: scale(1.1) !important;
+    z-index: 1000 !important;
+}
+
+.card-back.selected {
+    opacity: 0.6;
+    pointer-events: none;
+}
+
+.cards-display {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    margin: 40px 0;
+    flex-wrap: wrap;
+}
+
+.card-front {
+    width: 220px;
+    height: 380px;
+    perspective: 1000px;
+    background: #1a1a2e;
+    border-radius: 15px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    border: 1px solid rgba(255, 215, 0, 0.2);
+}
+
+.card-inner {
+    width: 100%;
+    height: 100%;
+    padding: 20px;
+    background: #1a1a2e;
+    border-radius: 15px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+    text-align: center;
+    transition: transform 0.6s;
+    display: flex;
+    flex-direction: column;
+}
+
+.card-inner h3 {
+    color: #ffd700;
+    font-size: 24px;
+    margin: 0;
+    text-shadow: 0 0 10px rgba(255, 215, 0, 0.3);
+    padding: 15px;
+    border-bottom: 1px solid rgba(255, 215, 0, 0.2);
+    margin: -20px -20px 20px -20px;
+}
+
+.card-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background: rgba(26, 26, 46, 0.95);
+    padding: 20px;
+    border-radius: 10px;
+    margin-top: 0;
+}
+
+.card-content p {
+    margin: 8px 0;
+    color: #e2e2e2;
+    font-size: 16px;
+    line-height: 1.6;
+}
+
+.reading-content {
+    padding: 30px;
+    background: #1a1a2e;
+    border-radius: 20px;
+    margin-top: 40px;
+    border: 1px solid rgba(255, 215, 0, 0.2);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+}
+
+.reading-content h2 {
+    color: #ffd700;
+    font-size: 28px;
+    margin-bottom: 20px;
+    text-align: center;
+    text-shadow: 0 0 10px rgba(255, 215, 0, 0.3);
+}
+
+.reading-content p {
+    color: #e2e2e2;
+    font-size: 18px;
+    line-height: 1.8;
+    text-align: justify;
+}
+
+.loading {
+    text-align: center;
+    padding: 40px;
+    color: #ffd700;
+    font-size: 20px;
+}
+
+.loading-dots span {
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    background: #ffd700;
+    border-radius: 50%;
+    margin: 0 5px;
+    animation: bounce 0.6s infinite alternate;
+}
+
+.complete-message {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: rgba(0, 0, 0, 0.8);
+    color: #ffd700;
+    padding: 25px 50px;
+    border-radius: 40px;
+    font-size: 22px;
+    z-index: 1000;
+    backdrop-filter: blur(5px);
+    box-shadow: 0 0 30px rgba(255, 215, 0, 0.2);
+}
+
+@keyframes bounce {
+    to { transform: translateY(-10px); }
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@media (max-width: 768px) {
+    .tarot-container {
+        padding: 20px;
+        margin: 10px;
+    }
+
+    .header h1 {
+        font-size: 2em;
+    }
+
+    #question-input {
+        width: 90%;
+        padding: 15px;
+    }
+
+    .card-front {
+        width: 180px;
+        height: 300px;
+    }
+
+    .reading-content {
+        padding: 20px;
+    }
+
+    .card-back {
+        background-size: cover;
+        border: 1px solid rgba(255, 215, 0, 0.3);
+    }
+
+    .deck {
+        height: 400px;
+        max-width: 100%;
+    }
+
+    .card-back.selected {
+        transform: scale(0.8) !important;
+    }
+
+    .card-front, .card-back {
+        background-color: #1a1a2e;
+    }
+    
+    .card-inner {
+        background: #1a1a2e;
+        padding: 10px;
+    }
+
+    .card-content {
+        background: rgba(26, 26, 46, 0.95);
+        padding: 10px;
+    }
+
+    .reading-content {
+        background: #1a1a2e;
+        padding: 20px;
+    }
+}
+
+/* 操作按鈕容器 */
+.action-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    margin-top: 30px;
+    padding: 20px;
+}
+
+.action-button.retry {
+    background: linear-gradient(45deg, #ffd700, #ff8c00);
+    color: #1a1a2e;
+    padding: 12px 30px;
+    font-size: 18px;
+    border: none;
+    border-radius: 25px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.action-button.retry:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    background: linear-gradient(45deg, #ff8c00, #ffd700);
+}
+
+/* 錯誤提示樣式 */
+.error {
+    color: #ff6b6b;
+    text-align: center;
+    padding: 20px;
+    background: rgba(255, 107, 107, 0.1);
+    border-radius: 10px;
+    margin: 20px 0;
+}
+
+/* 添加高解析度螢幕的支援 */
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+    .card-back {
+        background-size: contain;
+        background-color: #1a1a2e;
+    }
+}
+
+/* 響應式設計 */
+/* 大型手機 (568px 及以上) */
+@media screen and (min-width: 568px) {
+    .deck {
+        height: 350px;
+        max-width: 100%;
+    }
+    
+    .card-back {
+        width: 50px;
+        height: 85px;
+    }
+    
+    .card-front {
+        width: 160px;
+        height: 280px;
+    }
+    
+    .header h1 {
+        font-size: 2.2em;
+    }
+}
+
+/* 平板 (768px 及以上) */
+@media screen and (min-width: 768px) {
+    .deck {
+        height: 400px;
+        max-width: 90%;
+    }
+    
+    .card-back {
+        width: 55px;
+        height: 90px;
+    }
+    
+    .card-front {
+        width: 180px;
+        height: 300px;
+    }
+    
+    .header h1 {
+        font-size: 2.5em;
+    }
+    
+    .question-section {
+        width: 80%;
+    }
+}
+
+/* 小型筆電 (1024px 及以上) */
+@media screen and (min-width: 1024px) {
+    .deck {
+        height: 450px;
+        max-width: 800px;
+    }
+    
+    .card-back {
+        width: 60px;
+        height: 100px;
+    }
+    
+    .card-front {
+        width: 200px;
+        height: 340px;
+    }
+    
+    .header h1 {
+        font-size: 2.8em;
+    }
+}
+
+/* 大型螢幕 (1200px 及以上) */
+@media screen and (min-width: 1200px) {
+    .deck {
+        height: 500px;
+        max-width: 1000px;
+    }
+    
+    .card-back {
+        width: 65px;
+        height: 110px;
+    }
+    
+    .card-front {
+        width: 220px;
+        height: 380px;
+    }
+    
+    .header h1 {
+        font-size: 3em;
+    }
+    
+    .question-section {
+        width: 70%;
+    }
+}
+
+/* 超小型手機 (320px 以下) */
+@media screen and (max-width: 320px) {
+    .deck {
+        height: 300px;
+    }
+    
+    .card-back {
+        width: 45px;
+        height: 75px;
+    }
+    
+    .card-front {
+        width: 140px;
+        height: 240px;
+    }
+    
+    .header h1 {
+        font-size: 1.8em;
+    }
+    
+    #start-button {
+        padding: 12px 30px;
+        font-size: 16px;
+    }
+    
+    .reading-content {
+        padding: 15px;
+    }
+    
+    .reading-content h2 {
+        font-size: 22px;
+    }
+    
+    .reading-content p {
+        font-size: 16px;
+    }
+}
+
+/* 橫向模式 */
+@media screen and (orientation: landscape) and (max-height: 600px) {
+    .deck {
+        height: 280px;
+    }
+    
+    .card-back {
+        width: 45px;
+        height: 75px;
+    }
+    
+    .question-section {
+        margin: 20px auto;
+    }
+    
+    #question-input {
+        padding: 10px;
+    }
+}
+  
